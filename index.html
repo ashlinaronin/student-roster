@@ -9,14 +9,27 @@
   </head>
   <body>
     <div class="container" ng-controller="StudentsCtrl">
+      <div id="student-search">
+        <h4>Search Students</h4>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <input ng-model="query" type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+      </div>
       <div id="student-list">
-        <h2>Student List</h2>
-        <h3 ng-chicken-dance="cluck-cluck-cluck">Dance here</h3>
+        <h2 ng-show="students.length && filtered.length">Student List</h2>
+        <h2 ng-show="students.length && !filtered.length">No Matches</h2>
         <ul>
-          <li ng-repeat="item in students">
+          <li ng-repeat="item in filtered = (students | filter:query)">
             <span ng-click="editing = true" ng-hide="editing">
-              {{item.name}} <a ng-click="deleteStudent(item)">Delete</a>
+              {{item.name}}
             </span>
+            <!-- delete link in separate span so that clicking a name to update is separate -->
+            <span ng-hide="editing">
+              <a ng-click="deleteStudent(item)">Delete</a>
+            </span>
+
             <span class="form-group" ng-show="editing" ng-submit="editing = false">
               <form class="form-inline" role="form">
                 <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
