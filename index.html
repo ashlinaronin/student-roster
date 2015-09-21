@@ -12,12 +12,22 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Student List</h2>
+          <h3 ng-chicken-dance="cluck-cluck-cluck">Dance here</h3>
           <ul>
             <li ng-repeat="item in students">
-              {{item.name}}
+              {{item.name}} <a ng-click="deleteStudent(item)">Delete</a>
             </li>
           </ul>
         </div>
+      </div>
+      <div class="row">
+        <h2>New Student</h2>
+        <form ng-submit="addStudent()" class="form-inline" role="form">
+          <div class="form-group">
+            <input type="text" ng-model="studentName" class="form-control" placeholder="Enter name">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
       </div>
     </div>
   </body>
