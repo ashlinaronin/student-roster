@@ -8,46 +8,61 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   <body>
-    <div class="container" ng-controller="StudentsCtrl">
-      <div id="student-search">
-        <h4>Search Students</h4>
-        <form class="form-inline" role="form">
-          <div class="form-group">
-            <input ng-model="query" type="text" class="form-control" placeholder="Search">
-          </div>
-        </form>
-      </div>
-      <div id="student-list">
-        <h2 ng-show="students.length && filtered.length">Student List</h2>
-        <h2 ng-show="students.length && !filtered.length">No Matches</h2>
-        <ul>
-          <li ng-repeat="item in filtered = (students | filter:query)">
-            <span ng-click="editing = true" ng-hide="editing">
-              {{item.name}}
-            </span>
-            <!-- delete link in separate span so that clicking a name to update is separate -->
-            <span ng-hide="editing">
-              <a ng-click="deleteStudent(item)">Delete</a>
-            </span>
+    <div class="container">
 
-            <span class="form-group" ng-show="editing" ng-submit="editing = false">
-              <form class="form-inline" role="form">
-                <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
-                <button class="btn btn-default btn-sm" type="submit">Save</button>
-              </form>
-            </span>
-          </li>
-        </ul>
+      <div ng-controller="StudentsCtrl">
+        <div id="student-search">
+          <h4>Search Students</h4>
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input ng-model="query" type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+        </div>
+        <div id="student-list">
+          <h2 ng-show="students.length && filtered.length">Student List</h2>
+          <h2 ng-show="students.length && !filtered.length">No Matches</h2>
+          <ul>
+            <li ng-repeat="item in filtered = (students | filter:query)">
+              <span ng-click="editing = true" ng-hide="editing">
+                {{item.name}}
+              </span>
+              <!-- delete link in separate span so that clicking a name to update is separate -->
+              <span ng-hide="editing">
+                <a ng-click="StudentsFactory.deleteStudent(item)">Delete</a>
+              </span>
+
+              <span class="form-group" ng-show="editing" ng-submit="editing = false">
+                <form class="form-inline" role="form">
+                  <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
+                  <button class="btn btn-default btn-sm" type="submit">Save</button>
+                </form>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div id="new-student">
+          <h2>New Student</h2>
+          <form ng-submit="StudentsFactory.addStudent()" class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="StudentsFactory.studentName" class="form-control" placeholder="Enter name">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
       </div>
-      <div id="new-student">
-        <h2>New Student</h2>
-        <form ng-submit="addStudent()" class="form-inline" role="form">
-          <div class="form-group">
-            <input type="text" ng-model="studentName" class="form-control" placeholder="Enter name">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+
+      <div class="row permission" ng-controller="FieldTripsCtrl">
+        <div class="col-md-6">
+          <h2>Permission Slips</h2>
+          <ul>
+            <li ng-repeat="item in studentsWithPermission">
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
       </div>
+
     </div>
   </body>
 </html>
