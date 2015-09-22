@@ -1,9 +1,9 @@
 Student Roster
 ==========
 
-By Ashlin Aronin && Deron Johnson, 21-Sep-2015
+By Ashlin Aronin && Kevin Tokheim, 22-Sep-2015
 
-Keep track of students in Angular. You can't delete Brentwood Davis.
+Keep track of students in Angular. Now with field trip permission slips!
 
 Setup
 ----------
@@ -20,4 +20,4 @@ JavaScript, Angular, HTML, Bootstrap, CSS
 
 License
 ----------
-MIT License, Copyright (c) 2015 Ashlin Aronin && Deron Johnson
+MIT License, Copyright (c) 2015 Ashlin Aronin && Kevin Tokheim
