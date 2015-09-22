@@ -45,7 +45,7 @@
           <h2>New Student</h2>
           <form ng-submit="StudentsFactory.addStudent()" class="form-inline" role="form">
             <div class="form-group">
-              <input type="text" ng-model="StudentsFactory.studentName" class="form-control" placeholder="Enter name">
+              <input type="text" ng-model="StudentsFactory.studentName" id = "student-name" class="form-control" placeholder="Enter name">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -53,10 +53,18 @@
       </div>
 
       <div class="row permission" ng-controller="FieldTripsCtrl">
-        <div class="col-md-6">
-          <h2>Permission Slips</h2>
+        <div class="col-md-6" ng-show="studentsWithoutPermission.length">
+          <h3>Without Permission Slips</h3>
           <ul>
-            <li ng-repeat="item in studentsWithPermission">
+            <li ng-repeat="item in studentsWithoutPermission = (students | filter:{permissionSlip: false})">
+              <a ng-click="addStudentWithPermissionSlip(item)"> - received permission slip - </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6" ng-show="studentsWithPermission.length">
+          <h3>With Permission Slips</h3>
+          <ul>
+            <li ng-repeat="item in studentsWithPermission = (students | filter:{permissionSlip:true})">
               {{ item.name }}
             </li>
           </ul>
