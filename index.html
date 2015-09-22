@@ -4,7 +4,9 @@
     <title>You will be schooled here</title>
     <script src="lib/angular.js"></script>
     <script src="app.js"></script>
-    <script src="js/StudentsController.js"></script>
+    <script src="controllers/StudentsController.js"></script>
+    <script src="controllers/FieldTripsController.js"></script>
+    <script src="services/StudentsFactory.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   <body>
@@ -45,7 +47,7 @@
           <h2>New Student</h2>
           <form ng-submit="StudentsFactory.addStudent()" class="form-inline" role="form">
             <div class="form-group">
-              <input type="text" ng-model="StudentsFactory.studentName" id = "student-name" class="form-control" placeholder="Enter name">
+              <input type="text" ng-model="StudentsFactory.studentName" id="student-name" class="form-control" placeholder="Enter name">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -57,7 +59,7 @@
           <h3>Without Permission Slips</h3>
           <ul>
             <li ng-repeat="item in studentsWithoutPermission = (students | filter:{permissionSlip: false})">
-              <a ng-click="addStudentWithPermissionSlip(item)"> - received permission slip - </a>
+              {{ item.name }}<a ng-click="addStudentWithPermissionSlip(item)"> - received permission slip - </a>
             </li>
           </ul>
         </div>
